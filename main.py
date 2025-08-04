@@ -2,6 +2,7 @@ students = {}
 courses = {}
 def add_student():
         while True:
+            global id
             id = input("Ingresa el codigo del estudiante: ").upper()
             if id not in students:
                 break
@@ -11,7 +12,7 @@ def add_student():
         carrer = input("Ingresa el carrera del estudiante: ")
         students[id] = {
             "name": name,
-            "carrera": carrer
+            "carrer": carrer
         }
 def add_course():
     searc_code = input("Ingresa el codigo del estudiante: ")
@@ -21,7 +22,7 @@ def add_course():
         while True:
             print("1. Ingresar nuevo curso\n"
                   "2. Regresar al menu")
-            chose = input("Ingrese la opcion deseada")
+            chose = input("Ingrese la opcion deseada: ")
             match chose:
                 case "1":
                     try:
@@ -41,11 +42,10 @@ def add_course():
                                         print("La nota debe ser entre 0 a 100 puntos")
                                     else:
                                         print("Curso agregado")
-                                        students[id] = {
+                                        courses[id] = {
                                             "course": course,
-                                            "note": note,
+                                            "note": note
                                         }
-
                                         break
                                 except ValueError:
                                     print("Debe ser un numero entero")
@@ -57,12 +57,20 @@ def add_course():
                 case _:
                     print("Debe ser una opcion valida")
 
+def consult_students():
+    searc_code = input("Ingresa el codigo del estudiante: ").upper()
+    if not searc_code in students:
+        print("El codigo de estudiante ingresado no existe")
+    else:
+        for id, value in students.items():
+            print(f">Codigo unico: {id}\n"
+                  f">Nombre del estudiante: {value['name']}\n"
+                  f">Carrera: {value['carrer']}")
 
-
-
-
-
-
+            for id, value in courses[id]:
+                print(f"----Cursos del estudiante----")
+                print(f"Nombre del curso: {value['course']}\n"
+                    f"Nota: {value['note']}\n")
 
 
 
@@ -80,9 +88,17 @@ while True:
         case "1":
             add_student()
         case "2":
-            add_course()
+            if not students:
+                print("Aun no hay estudiantes")
+            else:
+                add_course()
         case "3":
-            pass
+            if not students:
+                print("Aun no hay estudiantes")
+            else:
+                consult_students()
         case "7":
             print("Saliendo del sistema")
             break
+        case _:
+            print("Debe ser una opcion valida")
