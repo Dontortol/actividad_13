@@ -78,16 +78,38 @@ def average():
     if not searc_code in students:
         print("El codigo de estudiante no existe")
     else:
+        suma = 0
+        long = 0
         for id_s, value_s in students.items():
             if id_s == searc_code:
-                print(f"Promedio general de {value_s['name']}")
-            for id_c, value_c in courses.items():
-                if id_c == searc_code:
-                    print(f"promedio general {len(value_c)}")
+                print(f"Promedio general de: {value_s['name']}: ",end="")
+                for id_c, value_c in courses.items():
+                    if id_c == searc_code:
+                        long = len(value_c)
+                        for s in value_c.values():
+                            suma += s
+                        break
+        print(f"{suma/long}")
 
 
 def aprove ():
-    pass
+    searc_code = input("Ingresa el codigo del estudiante: ")
+    if not searc_code in students:
+        print("El codigo de estudiante no existe")
+    else:
+        suma = 0
+        long = 0
+        for id_s, value_s in students.items():
+            if id_s == searc_code:
+                print(f"Promedio general de: {value_s['name']}: ", end="")
+                for id_c, value_c in courses.items():
+                    if id_c == searc_code:
+                        long = len(value_c)
+                        for s in value_c.values():
+                            suma += s
+                        break
+        print(f"{suma / long}")
+
 
 def show ():
     for id_s, value in students.items():
