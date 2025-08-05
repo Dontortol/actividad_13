@@ -1,5 +1,5 @@
-students = {'123': {'name': 'Rodrigo', 'carrer': 'Correr'}, '555': {'name': 'Yhibra', 'carrer': 'Caminar'}}
-courses = {'123':{'comer': 90, 'pepe': 80}, '555':{}}
+students = {}
+courses = {}
 def add_student():
     while True:
         id = input("Ingresa el codigo del estudiante: ").upper()
@@ -15,7 +15,7 @@ def add_student():
         "carrer": carrer
     }
 def add_course():
-    searc_code = input("Ingresa el codigo del estudiante: ")
+    searc_code = input("Ingresa el codigo del estudiante: ").upper()
     if not searc_code in students:
         print("El codigo de estudiante no existe")
     else:
@@ -70,11 +70,10 @@ def consult_students():
                         if id_c == searc_code:
                             print(f"----Cursos del estudiante----")
                             print(f"{value_c}\n")
-    print(students)
-    print(courses)
+
 
 def average():
-    searc_code = input("Ingresa el codigo del estudiante: ")
+    searc_code = input("Ingresa el codigo del estudiante: ").upper()
     if not searc_code in students:
         print("El codigo de estudiante no existe")
     else:
@@ -82,7 +81,7 @@ def average():
         long = 0
         for id_s, value_s in students.items():
             if id_s == searc_code:
-                print(f"Promedio general de: {value_s['name']}: ",end="")
+                print(f"Promedio general de {value_s['name']}: ",end="")
                 for id_c, value_c in courses.items():
                     if id_c == searc_code:
                         long = len(value_c)
@@ -93,7 +92,7 @@ def average():
 
 
 def aprove ():
-    searc_code = input("Ingresa el codigo del estudiante: ")
+    searc_code = input("Ingresa el codigo del estudiante: ").upper()
     if not searc_code in students:
         print("El codigo de estudiante no existe")
     else:
@@ -101,7 +100,7 @@ def aprove ():
         long = 0
         for id_s, value_s in students.items():
             if id_s == searc_code:
-                print(f"Estado de aprovacion: {value_s['name']}: ", end="")
+                print(f"Estado de aprovacion {value_s['name']}: ", end="")
                 for id_c, value_c in courses.items():
                     if id_c == searc_code:
                         long = len(value_c)
@@ -117,12 +116,10 @@ def aprove ():
 
 def show ():
     for id_s, value in students.items():
-            print(f">Codigo unico: {id_s}\n"
+            print(f"\n>Codigo unico: {id_s}\n"
                   f">Nombre del estudiante: {value['name']}\n"
                   f">Carrera: {value['carrer']}")
-            for id_c, value_c in courses.items():
-                    print(f"----Cursos del estudiante----")
-                    print(f"{value_c}\n")
+            print(f"\n{courses[id_s]}")
 
 
 
@@ -160,7 +157,10 @@ while True:
             else:
                 aprove()
         case "6":
-            show()
+            if not students:
+                print("Aun no hay estudiantes")
+            else:
+                show()
         case "7":
             print("Saliendo del sistema")
             break
