@@ -1,19 +1,19 @@
-students = {}
-courses = {}
+students = {'123': {'name': 'Rodrigo', 'carrer': 'Correr'}, '555': {'name': 'Yhibra', 'carrer': 'Gay'}}
+courses = {'123':{}, '555':{}}
 def add_student():
-        while True:
-            global id
-            id = input("Ingresa el codigo del estudiante: ").upper()
-            if id not in students:
-                break
-            else:
-                print("El codigo de estudiante ya existe")
-        name = input("Ingresa nombre completo del estudiante: ")
-        carrer = input("Ingresa el carrera del estudiante: ")
-        students[id] = {
-            "name": name,
-            "carrer": carrer
-        }
+    while True:
+        id = input("Ingresa el codigo del estudiante: ").upper()
+        if id not in students:
+            break
+        else:
+            print("El codigo de estudiante ya existe")
+    name = input("Ingresa nombre completo del estudiante: ").capitalize()
+    carrer = input("Ingresa el carrera del estudiante: ").capitalize()
+    courses[id] = {}
+    students[id] = {
+        "name": name,
+        "carrer": carrer
+    }
 def add_course():
     searc_code = input("Ingresa el codigo del estudiante: ")
     if not searc_code in students:
@@ -34,7 +34,6 @@ def add_course():
                     else:
                         for i in range(course_amount):
                             course = input("Ingresa el nombre del curso: ")
-
                             while True:
                                 try:
                                     note = int(input("Ingresa el nota del curso: "))
@@ -42,10 +41,7 @@ def add_course():
                                         print("La nota debe ser entre 0 a 100 puntos")
                                     else:
                                         print("Curso agregado")
-                                        courses[id] = {
-                                            "course": course,
-                                            "note": note
-                                        }
+                                        courses[searc_code][course] = note
                                         break
                                 except ValueError:
                                     print("Debe ser un numero entero")
@@ -62,15 +58,20 @@ def consult_students():
     if not searc_code in students:
         print("El codigo de estudiante ingresado no existe")
     else:
-        for id, value in students.items():
-            print(f">Codigo unico: {id}\n"
-                  f">Nombre del estudiante: {value['name']}\n"
-                  f">Carrera: {value['carrer']}")
-
-            for id, value in courses[id]:
-                print(f"----Cursos del estudiante----")
-                print(f"Nombre del curso: {value['course']}\n"
-                    f"Nota: {value['note']}\n")
+        for id_s, value in students.items():
+            if id_s == searc_code:
+                print(f">Codigo unico: {id_s}\n"
+                      f">Nombre del estudiante: {value['name']}\n"
+                      f">Carrera: {value['carrer']}")
+                if not courses:
+                    print("sin cursos asignados")
+                else:
+                    for id_c, value_c in courses.items():
+                        if id_c == searc_code:
+                            print(f"----Cursos del estudiante----")
+                            print(f"Nombre del curso: {value_c}\n")
+    print(students)
+    print(courses)
 
 
 
