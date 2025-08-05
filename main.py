@@ -101,14 +101,18 @@ def aprove ():
         long = 0
         for id_s, value_s in students.items():
             if id_s == searc_code:
-                print(f"Promedio general de: {value_s['name']}: ", end="")
+                print(f"Estado de aprovacion: {value_s['name']}: ", end="")
                 for id_c, value_c in courses.items():
                     if id_c == searc_code:
                         long = len(value_c)
                         for s in value_c.values():
                             suma += s
                         break
-        print(f"{suma / long}")
+        ap = suma / long
+        if ap >= 0 and ap <= 60:
+            print("Reprobado")
+        else:
+            print("Aprobado")
 
 
 def show ():
@@ -151,7 +155,10 @@ while True:
             else:
                 average()
         case "5":
-            pass
+            if not courses or not students:
+                print("Aun no hay cursos o no hay estudiantes")
+            else:
+                aprove()
         case "6":
             show()
         case "7":
