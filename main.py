@@ -1,5 +1,5 @@
-students = {'123': {'name': 'Rodrigo', 'carrer': 'Correr'}, '555': {'name': 'Yhibra', 'carrer': 'Gay'}}
-courses = {'123':{}, '555':{}}
+students = {'123': {'name': 'Rodrigo', 'carrer': 'Correr'}, '555': {'name': 'Yhibra', 'carrer': 'Caminar'}}
+courses = {'123':{'comer': 90, 'pepe': 80}, '555':{}}
 def add_student():
     while True:
         id = input("Ingresa el codigo del estudiante: ").upper()
@@ -69,9 +69,34 @@ def consult_students():
                     for id_c, value_c in courses.items():
                         if id_c == searc_code:
                             print(f"----Cursos del estudiante----")
-                            print(f"Nombre del curso: {value_c}\n")
+                            print(f"{value_c}\n")
     print(students)
     print(courses)
+
+def average():
+    searc_code = input("Ingresa el codigo del estudiante: ")
+    if not searc_code in students:
+        print("El codigo de estudiante no existe")
+    else:
+        for id_s, value_s in students.items():
+            if id_s == searc_code:
+                print(f"Promedio general de {value_s['name']}")
+            for id_c, value_c in courses.items():
+                if id_c == searc_code:
+                    print(f"promedio general {len(value_c)}")
+
+
+def aprove ():
+    pass
+
+def show ():
+    for id_s, value in students.items():
+            print(f">Codigo unico: {id_s}\n"
+                  f">Nombre del estudiante: {value['name']}\n"
+                  f">Carrera: {value['carrer']}")
+            for id_c, value_c in courses.items():
+                    print(f"----Cursos del estudiante----")
+                    print(f"{value_c}\n")
 
 
 
@@ -98,6 +123,15 @@ while True:
                 print("Aun no hay estudiantes")
             else:
                 consult_students()
+        case "4":
+            if not courses or not students:
+                print("Aun no hay cursos o no hay estudiantes")
+            else:
+                average()
+        case "5":
+            pass
+        case "6":
+            show()
         case "7":
             print("Saliendo del sistema")
             break
